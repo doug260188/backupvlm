@@ -10,7 +10,7 @@ pipeline {
 
           docker.image('ubuntu').latest {
             // Criar contêiner temporário
-            docker.run("-d --name backup-container -v ${volumes.join(' -v ')} ubuntu")
+            dockrun("-d --name backup-container -v ${volumes.join(' -v ')} ubuntu")
 
             // Copiar dados do volume
             for (def volume : volumes) {
