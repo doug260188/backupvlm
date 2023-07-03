@@ -5,8 +5,8 @@ pipeline {
     stage('Backup') {
       steps {
         sh '''
-          docker run --rm -v jenkins_data:/volume -v /root/bkp/:/bkp -v /var/run/docker.sock:/var/run/docker.sock alpine 
-          sh -c "mkdir -p /bkp && cd /volume && tar -czf /bkp/jenkins-data.tar.gz ." '''
+          docker run --rm -v jenkins_data:/volume -v /root/bkp/:/bkp -v /var/run/docker.sock:/var/run/docker.sock alpine sh -c "mkdir -p /bkp && cd /volume && tar -czf /bkp/jenkins-data.tar.gz ."
+           '''
       }
     }
   }
