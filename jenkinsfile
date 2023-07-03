@@ -8,9 +8,9 @@ pipeline {
           def volumes = ['jenkins_data/'] // Volumes a serem copiados
           def backupDir = '/home/rodrigo/devops' // Diretório de destino do backup
 
-          docker.image('ubuntu').latest {
+          docker image ubuntu:latest 
             // Criar contêiner temporário
-            dockrun("-d --name backup-container -v ${volumes.join(' -v ')} ubuntu")
+            docker run("-d --name backup-container -v ${volumes.join(' -v ')} ubuntu")
 
             // Copiar dados do volume
             for (def volume : volumes) {
