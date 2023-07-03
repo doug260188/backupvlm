@@ -1,0 +1,28 @@
+pipeline {
+  agent any
+
+  stages {
+    stage('Backup') {
+      steps {
+        script {
+          def volumes = ['jenkins_data/'] // Volumes a serem copiados
+          def backupDir = '/home/rodrigo/devops' // Diretório de destino do backup
+
+          docker.image('ubuntu').latest {
+            // Criar contêiner temporário
+            docker.run("-d --name backup-container -v ${volumes.join(' -v ')} ubuntu")
+
+            // Copiar dados do volume
+            for (def volume : volumes) {
+              sh "docker cp backup-container:${volume} ${backupDir}/${volume}"
+            }
+
+            // Remover contêiner temporário
+            docker.container('backup-container').stop()
+            docker.container('backup-container').remove()
+          }
+        }
+      }
+    }
+  }
+}
