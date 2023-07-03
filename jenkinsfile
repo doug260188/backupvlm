@@ -14,7 +14,7 @@ pipeline {
 
             // Copiar dados do volume
             for (def volume : volumes) {
-              sh "docker cp backup-container:${volume} ${backupDir}/${volume}"
+              sh "docker cp backup-container:${volumes} ${backupDir}/${volumes}"
             }
 
             // Remover contêiner temporário
