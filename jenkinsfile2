@@ -13,8 +13,8 @@ pipeline {
     stage('Sending') {
       steps {
         sh '''
-          cd /home/rodrigo/test/
-          aws s3 cp jenkins-data.tar.gz s3://www.aulacloudcba.com/
+          --cd /home/rodrigo/test/
+          --aws s3 cp jenkins-data.tar.gz s3://www.aulacloudcba.com/
            '''
       }
     }
