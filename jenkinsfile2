@@ -13,7 +13,7 @@ pipeline {
     stage('sending') {
       steps {
         sh '''
-          docker run --rm -v /home/rodrigo/test/jenkins-data.tar.gz:/test -v ~/.aws:/.aws amazon/aws-cli s3 cp /test s3://www.aulacloudcba.com/  '''
+          docker run --rm -v /home/rodrigo/test/jenkins-data.tar.gz:/test -e AWS_ACCESS_KEY_ID=<AKIAZMGVLKAU362DMAV5> -e AWS_SECRET_ACCESS_KEY=<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> -v ~/.aws:/.aws amazon/aws-cli s3 cp /test s3://www.aulacloudcba.com/  '''
       }
     }
     //  stage('Sending') {
