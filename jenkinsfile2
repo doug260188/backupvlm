@@ -13,7 +13,7 @@ pipeline {
     stage('enviando') {
         steps {
             sh '''
-               aws s3 cp /root/bkp/jenkins-data.tar.gz s3://arn:aws:s3:::www.aulacloudcba.com/
+               aws s3 cp /root/bkp/jenkins-data.tar.gz s3://www.aulacloudcba.com/
                '''
         }
     }
