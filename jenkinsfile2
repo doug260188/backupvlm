@@ -5,7 +5,7 @@ pipeline {
     stage('Backup') {
       steps {
         sh '''
-          docker run --rm -v jenkins_data:/volume -v /home/rodrigo/test/:/test -v ~/.aws:/root/.aws amazon/cli:latest sh -c "mkdir -p /test && cd /volume && tar -czf /test/jenkins-data.tar.gz ."
+          docker run --rm -v jenkins_data:/volume -v /home/rodrigo/test/:/test -v ~/.aws:/root/.aws amazon/aws-cli sh -c "mkdir -p /test && cd /volume && tar -czf /test/jenkins-data.tar.gz ."
            '''
       }
     }
