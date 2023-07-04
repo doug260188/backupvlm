@@ -13,7 +13,7 @@ pipeline {
     stage('sending') {
       steps {
         sh '''
-          docker run --rm -v /home/rodrigo/test/jenkins-data.tar.gz:/test -v ~/.aws:/root/.aws amazon/aws-cli aws configure list s3 cp /test s3://www.aulacloudcba.com/
+          docker run --rm -v /home/rodrigo/test/jenkins-data.tar.gz:/test -v ~/.aws:/root/.aws amazon/aws-cli aws configure list aws s3 cp /test s3://www.aulacloudcba.com/
            '''
       }
     }
