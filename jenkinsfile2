@@ -5,7 +5,7 @@ pipeline {
     stage('Backup') {
       steps {
         sh '''
-          docker run --rm -v jenkins_data:/volume -v /home/rodrigo/test/:/test -v ~/.aws:/root/.aws -e AWS_ACCESS_KEY_ID=<AKIAZMGVLKAU362DMAV5> -e AWS_SECRET_ACCESS_KEY=<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> amazon/aws-cli sh -c "mkdir -p /test && cd /volume && tar -czf /test/jenkins-data.tar.gz ."
+          docker run --rm -v jenkins_data:/volume -v /home/rodrigo/test/:/test amazon/aws-cli sh -c "mkdir -p /test && cd /volume && tar -czf /test/jenkins-data.tar.gz ."
            '''
       }
     }
