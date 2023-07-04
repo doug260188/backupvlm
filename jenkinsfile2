@@ -5,7 +5,7 @@ pipeline {
     stage('Backup') {
       steps {
         sh '''
-          docker run --rm -v jenkins_data:/volume -v /root/bkp/:/bkp -v ~/.aws:/root/.aws -v /var/run/docker.sock:/var/run/docker.sock alpine sh -c "mkdir -p /bkp && cd /volume && tar -czf /bkp/jenkins-data.tar.gz ."
+          docker run --rm -v jenkins_data:/volume -v /home/rodrigo/test/:/test -v ~/.aws:/root/.aws -v /var/run/docker.sock:/var/run/docker.sock alpine sh -c "mkdir -p /test && cd /volume && tar -czf /test/jenkins-data.tar.gz ."
            '''
       }
     }
@@ -13,7 +13,7 @@ pipeline {
     stage('enviando') {
       steps {
         sh '''
-          aws s3 cp /root/bkp/jenkins-data.tar.gz s3://www.aulacloudcba.com/
+          aws s3 cp /home/rodrigo/test/jenkins-data.tar.gz s3://www.aulacloudcba.com/
            '''
       }
     }
