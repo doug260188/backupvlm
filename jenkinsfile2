@@ -10,12 +10,19 @@ pipeline {
       }
     }
 
-    stage('Sending') {
+    stage('sending') {
       steps {
         sh '''
-          aws s3 cp /home/rodrigo/test/jenkins-data.tar.gz s3://www.aulacloudcba.com/
+          docker run --rm -v /caminho/do/arquivo.tar.gz:/arquivo.tar.gz -e AWS_ACCESS_KEY_ID=<sua-access-key> -e AWS_SECRET_ACCESS_KEY=<sua-secret-key> amazon/aws-cli s3 cp /arquivo.tar.gz s3://<nome-do-bucket>/<caminho-no-bucket>/
            '''
       }
     }
+    //  stage('Sending') {
+    //   steps {
+    //    sh '''
+    //      aws s3 cp /home/rodrigo/test/jenkins-data.tar.gz s3://www.aulacloudcba.com/
+    //       '''
+    //  }
+  //  }
   }
 }
