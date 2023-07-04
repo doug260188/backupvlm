@@ -10,10 +10,10 @@ pipeline {
       }
     }
 
-    stage('enviando') {
+    stage('Sending') {
       steps {
         sh '''
-          aws s3 cp /test/jenkins-data.tar.gz s3://www.aulacloudcba.com/
+          aws s3 cp /home/rodrigo/test/jenkins-data.tar.gz s3://www.aulacloudcba.com/
            '''
       }
     }
