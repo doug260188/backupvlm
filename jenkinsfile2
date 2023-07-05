@@ -14,7 +14,7 @@ pipeline {
       steps {
         script {
           docker.image('amazon/aws-cli').inside {
-            withCredentials([string(credentialsId: '644692529193', variable: '644692529193')]) {
+            withCredentials([string(credentialsId: 'cb6821df-a0e4-4379-98b1-6443f4c04465', variable: 'AWS_CREDENTIALS')]) {
               sh '''
                 aws configure set aws_access_key_id $AWS_CREDENTIALS_USR
                 aws configure set aws_secret_access_key $AWS_CREDENTIALS_PSW
