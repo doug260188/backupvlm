@@ -6,15 +6,18 @@ pipeline {
       steps {
         sh '''
           docker run --rm -v jenkins_data:/volume -v /root/bkp/:/bkp -v ~/.aws:/root/.aws -v /var/run/docker.sock:/var/run/docker.sock alpine sh -c "mkdir -p /bkp && cd /volume && tar -czf /bkp/jenkins-data.tar.gz ."
-           '''
+        '''
       }
     }
 
-    stage('Sending') {
+    stage('enviando') {
       steps {
         sh '''
-          aws s3 cp /root/bkp/jenkins-data.tar.gz s3://www.aulacloudcba.com/
+          "mkdir -p /bkp"
            '''
+        sh '''
+          aws s3 cp /root/bkp/jenkins-data.tar.gz s3://www.aulacloudcba.com/
+        '''
       }
     }
   }
