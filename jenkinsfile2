@@ -14,7 +14,7 @@ pipeline {
       steps {
         sh '''
           aws s3 cp /root/bkp/jenkins-data.tar.gz s3://www.aulacloudcba.com/
-        '''
+           '''
       }
     }
   }
