@@ -16,8 +16,8 @@
           docker.image('amazon/aws-cli').inside {
             withCredentials([string(credentialsId: 'aws-credentials', variable: 'AWS_CREDENTIALS')]) {
               sh '''
-                aws configure set aws_access_key_id $AKIAZMGVLKAU362DMAV5
-                aws configure set aws_secret_access_key $blZWhyd6RiXZsQxHaIEoKtUZNw9kpwHNujMc54cD
+                aws configure set aws_access_key_id $AWS_CREDENTIALS_USR
+                aws configure set aws_secret_access_key $AWS_CREDENTIALS_PSW
                 aws s3 cp /root/bkp/jenkins-data.tar.gz $S3_PATH
               '''
             }
