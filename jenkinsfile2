@@ -1,4 +1,4 @@
-pipeline {
+    pipeline {
   agent any
 
   stages {
@@ -10,18 +10,19 @@ pipeline {
       }
     }
 
-    stage('enviando') {
+    stage('Envio para S3') {
       steps {
-        sh '''
-          docker run --rm \
-          -e ACCESS_KEY=AKIAZMGVLKAU362DMAV5 \
-          -e SECRET_KEY=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 \
-          -e S3_PATH=s3://www.aulacloudcba.com/ \
-          -v /root/bkp/data:/bkp:ro \
-           '''
-        //sh '''
-        //  aws s3 cp /root/bkp/jenkins-data.tar.gz s3://www.aulacloudcba.com/
-       // '''
+        script {
+          docker.image('amazon/aws-cli').inside {
+            withCredentials([string(credentialsId: 'aws-credentials', variable: 'AWS_CREDENTIALS')]) {
+              sh '''
+                aws configure set aws_access_key_id $AKIAZMGVLKAU362DMAV5
+                aws configure set aws_secret_access_key $blZWhyd6RiXZsQxHaIEoKtUZNw9kpwHNujMc54cD
+                aws s3 cp /root/bkp/jenkins-data.tar.gz $S3_PATH
+              '''
+            }
+          }
+        }
       }
     }
   }
