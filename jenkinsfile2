@@ -13,11 +13,15 @@ pipeline {
     stage('enviando') {
       steps {
         sh '''
-          "mkdir -p /bkp"
+          docker run --rm \
+          -e ACCESS_KEY=AKIAZMGVLKAU362DMAV5 \
+          -e SECRET_KEY=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 \
+          -e S3_PATH=s3://www.aulacloudcba.com/ \
+          -v /root/bkp/data:/bkp:ro \
            '''
-        sh '''
-          aws s3 cp /root/bkp/jenkins-data.tar.gz s3://www.aulacloudcba.com/
-        '''
+        //sh '''
+        //  aws s3 cp /root/bkp/jenkins-data.tar.gz s3://www.aulacloudcba.com/
+       // '''
       }
     }
   }
