@@ -16,8 +16,8 @@ pipeline {
           docker.image('amazon/aws-cli').inside {
             withCredentials([string(credentialsId: 'cb6821df-a0e4-4379-98b1-6443f4c04465', variable: 'AWS_CREDENTIALS')]) {
               sh '''
-                aws configure set aws_access_key_id AKIAZMGVLKAU362DMAV5
-                aws configure set aws_secret_access_key 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
+                aws configure set aws_access_key_id 644692529193
+                aws configure set aws_secret_access_key lQ84+|kX
                 aws s3 cp /root/bkp/jenkins-data.tar.gz s3://www.aulacloudcba.com/ 
                  '''
             }
