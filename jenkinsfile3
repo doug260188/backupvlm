@@ -1,0 +1,22 @@
+// fazendo bkp de volume e enviando para s3
+pipeline {
+  agent any
+
+  stages {
+    stage('Backup') {
+      steps {
+        sh '''
+          docker run --rm -v jenkins_data:/volume -v /root/bkp/:/bkp -v /var/run/docker.sock:/var/run/docker.sock alpine sh -c "mkdir -p /bkp && cd /volume && tar -czf /bkp/jenkins-data.tar.gz ."
+           '''
+      }
+    }
+
+    stage('Envio para S3') {
+      steps {
+        sh '''
+          docker run --rm -v /root/bkp/jenkins-data.tar.gz:/jenkins-data.tar.gz -e AWS_ACCESS_KEY_ID=AKIAZMGVLKAU362DMAV5 -e AWS_SECRET_ACCESS_KEY=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 amazon/aws-cli s3 cp /jenkins-data.tar.gz s3://www.aulacloudcba.com/
+           '''
+            }
+      }
+   }
+}
